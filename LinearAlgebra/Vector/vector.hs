@@ -4,23 +4,29 @@ module LinearAlgebra.Vector
 , addVectors
 , fromVector
 , subtractVectors
+, unitVector
 ) where
 import Data.List
 
 data Vector a = Vector [a] deriving (Show)
 
-makeVector :: (Num a) => [a] -> Vector a
-makeVector xs = Vector xs
+makeVector :: (Floating a) => [a] -> Vector a
+makeVector = Vector
 
 fromVector :: Vector a -> [a]
 fromVector (Vector v) = v
 
-multiplyScalar :: (Num a) => a -> Vector a -> Vector a
+multiplyScalar :: (Floating a) => a -> Vector a -> Vector a
 multiplyScalar c (Vector v) = Vector $ map (c*) v
 
-addVectors :: (Num a) => [Vector a] -> Vector a
-addVectors vs = Vector $ map (foldl1 (+)) $ transpose $ map fromVector vs
+addVectors :: (Floating a) => [Vector a] -> Vector a
+addVectors vs = Vector $ map sum $ transpose $ map fromVector vs
 
-subtractVectors :: (Num a) => [Vector a] -> Vector a
+subtractVectors :: (Floating a) => [Vector a] -> Vector a
 subtractVectors vs = Vector $ map (foldl1 (-)) $ transpose $ map fromVector vs
+
+unitVector :: (Floating a) => Vector a -> Vector a
+unitVector (Vector v) =
+  let multiplier = sqrt ((/) 1 $ sum $ map (**2) v)
+  in Vector $ map (multiplier*) v
 
