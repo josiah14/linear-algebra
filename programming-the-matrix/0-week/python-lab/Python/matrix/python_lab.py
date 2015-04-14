@@ -41,12 +41,12 @@ expression_val = 2**(y+1/2) if x+10<0 else 2**(y-1/2)
 
 
 ## 5: (Task 5) Squares Set Comprehension
-first_five_squares =  None #{ ... for _ in {1,2,3,4,5} }
+first_five_squares =  { x**2 for x in {1,2,3,4,5} }
 
 
 
 ## 6: (Task 6) Powers-of-2 Set Comprehension
-first_five_pows_two = None #{ ... for _ in {0,1,2,3,4} }
+first_five_pows_two = { 2**x for x in {0,1,2,3,4} }
 
 
 
@@ -54,8 +54,9 @@ first_five_pows_two = None #{ ... for _ in {0,1,2,3,4} }
 # Assign three-element sets to X1 and Y1 so that
 # {x*y for x in X1 for y in Y1} evaluates to a nine-element set.
 
-X1 = None #{ ..., ..., ... }
-Y1 = None #{ ..., ..., ... }
+X1 = { 1, 3, 5 }
+Y1 = { 7, 11, 13 }
+nine_element_double_set_comprehension = {x*y for x in X1 for y in Y1}
 
 
 
@@ -63,8 +64,9 @@ Y1 = None #{ ..., ..., ... }
 # Assign disjoint three-element sets to X1 and Y1 so that
 # {x*y for x in X1 for y in Y1} evaluates to a five-element set.
 
-X2 = None #{ ..., ..., ... }
-Y2 = None #{ ..., ..., ... }
+X2 = { 0, 2, 3 }
+Y2 = { 0, 2, 1 }
+five_element_double_set_comprehension = {x*y for x in X2 for y in Y2}
 
 
 
