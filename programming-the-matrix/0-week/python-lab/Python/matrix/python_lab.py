@@ -119,24 +119,24 @@ dlist = [{'James':'Sean', 'director':'Terence'}, {'James':'Roger', 'director':'L
 k = 'James'
 # Replace [...] with a one-line comprehension that uses dlist and k
 # and that evaluates to ['Sean','Roger','Pierce']
-value_list = None #[...]
+value_list = [ kv[k] for kv in dlist ]
 
 ## 21: (Task 21) Extracting the value corresponding to k when it exists
 dlist = [{'Bilbo':'Ian','Frodo':'Elijah'},{'Bilbo':'Martin','Thorin':'Richard'}]
 k = 'Bilbo'
-#Replace [...] with a one-line comprehension 
-value_list_modified_1 = None #[...] # <-- Use the same expression here
+#Replace [...] with a one-line comprehension
+value_list_modified_1 = [ kv[k] for kv in dlist if kv.get(k, None) != None ]
 k = 'Frodo'
-value_list_modified_2 = None #[...] # <-- as you do here
+value_list_modified_2 = [ kv[k] for kv in dlist if kv.get(k, None) != None ]
 
 ## 22: (Task 22) A dictionary mapping integers to their squares
 # Replace {...} with a one-line dictionary comprehension
-square_dict = None #{...}
+square_dict = { number: number**2 for number in range(100)  }
 
 ## 23: (Task 23) Making the identity function
 D = {'red','white','blue'}
 # Replace {...} with a one-line dictionary comprehension
-identity_dict = None #{...}
+identity_dict = { key: key for key in D }
 
 ## 24: (Task 24) Mapping integers to their representation over a given base
 base = 10
