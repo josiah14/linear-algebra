@@ -1,3 +1,4 @@
+from functools import reduce
 # version code d345910f07ae
 coursera = 1
 # Please fill out this stencil and submit using the provided submission script.
