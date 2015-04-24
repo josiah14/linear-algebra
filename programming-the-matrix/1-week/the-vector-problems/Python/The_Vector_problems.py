@@ -46,16 +46,38 @@ p4_vectors = {
     'f': [GF2.zero, GF2.zero, GF2.zero, GF2.zero, GF2.zero, GF2.one, GF2.one]
 }
 
+def match_vector_sums_to(vector_dict, v):
+    return set(
+        vector.flatten2(
+            [ x
+              for x in vector.permutations_unordered_no_repeat(list(vector_dict))
+              if vector.add(vector_dict[x[0]], vector_dict[x[1]]) == v
+            ]
+        )
+    )
+
 u0 = [GF2.zero, GF2.zero, GF2.one, GF2.zero, GF2.zero, GF2.one, GF2.zero]
-u_0010010 = set(vector.flatten2([ x for x in vector.permutations_unordered_no_repeat(list(p4_vectors)) if vector.add(p4_vectors[x[0]], p4_vectors[x[1]]) == u0 ]))
-u1 = [GF2.zero, GF2.zero, GF2.one, GF2.zero, GF2.zero, GF2.one, GF2.zero]
-u_0100010 = None
+u_0010010 = match_vector_sums_to(p4_vectors, u0)
+
+u1 = [GF2.zero, GF2.one, GF2.zero, GF2.zero, GF2.zero, GF2.one, GF2.zero]
+u_0100010 = match_vector_sums_to(p4_vectors, u1)
 
 ## 5: (Problem 5) GF2 Vector Addition B
 # Use the same format as the previous problem
 
-v_0010010 = None
-v_0100010 = None
+p5_vectors = {
+    'a': [GF2.one, GF2.one, GF2.one, GF2.zero, GF2.zero, GF2.zero, GF2.zero],
+    'b': [GF2.zero, GF2.one, GF2.one, GF2.one, GF2.zero, GF2.zero, GF2.zero],
+    'c': [GF2.zero, GF2.zero, GF2.one, GF2.one, GF2.one, GF2.zero, GF2.zero],
+    'd': [GF2.zero, GF2.zero, GF2.zero, GF2.one, GF2.one, GF2.one, GF2.zero],
+    'e': [GF2.zero, GF2.zero, GF2.zero, GF2.zero, GF2.one, GF2.one, GF2.one],
+    'f': [GF2.zero, GF2.zero, GF2.zero, GF2.zero, GF2.zero, GF2.one, GF2.one]
+}
+
+v0 = [GF2.zero, GF2.zero, GF2.one, GF2.zero, GF2.zero, GF2.one, GF2.zero]
+v_0010010 = match_vector_sums_to(p5_vectors, v0)
+p5_v1 = [GF2.zero, GF2.one, GF2.zero, GF2.zero, GF2.zero, GF2.one, GF2.zero]
+v_0100010 = match_vector_sums_to(p5_vectors, p5_v1)
 
 ## 6: (Problem 6) Solving Linear Equations over GF(2)
 #You should be able to solve this without using a computer.

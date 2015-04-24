@@ -24,15 +24,11 @@ def inverse_natural_sum(num, start):
     
 def permutations_unordered_no_repeat(collection):
     def reducer(acc, x):
-        if collection == None: raise ValueError("cannot provide NoneType")
-        if acc == None or acc == collection[0]:
-            [ (acc, y) for y in collection[1:] ] + [ (x, y) for y in collection[2:] ]
+        if acc == collection[0]:
+            return [ (acc, y) for y in collection[1:] ] + [ (x, y) for y in collection[2:] ]
         else:
-            acc + [ (x, y)
-                    for y in collection[len(collection) - 1 -
-                                        inverse_natural_sum(
-                                            len(acc),
-                                            len(collection) - 1) + 2:] ]
+            start_index = len(collection) - 1 - inverse_natural_sum(len(acc), len(collection) - 1) + 2
+            return acc + [ (x, y) for y in collection[start_index:] ]
     return reduce(reducer, collection)
 
 def flatten2(collection):
