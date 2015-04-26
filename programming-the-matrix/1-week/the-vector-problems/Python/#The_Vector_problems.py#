@@ -81,11 +81,7 @@ v_0100010 = match_vector_sums_to(p5_vectors, p5_v1)
 
 ## 6: (Problem 6) Solving Linear Equations over GF(2)
 #You should be able to solve this without using a computer.
-a = [GF2.one, GF2.one, GF2.zero, GF2.zero]
-b = [GF2.one, GF2.zero, GF2.one, GF2.zero]
-c = [GF2.one, GF2.one, GF2.one, GF2.one]
-x_gf2 = [GF2.one, GF2.zero, GF2.zero, GF2.zero]
-x_gf2_comp = vector.GF2_solve_dot_prod_sys(one, a, b, c)
+x_gf2 = None
 
 ## 7: (Problem 7) Formulating Equations using Dot-Product
 #Please provide each answer as a list of numbers
