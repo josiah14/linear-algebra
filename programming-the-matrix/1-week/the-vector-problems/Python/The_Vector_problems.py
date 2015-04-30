@@ -1,4 +1,5 @@
 import vector
+from math import trunc, sqrt
 import GF2
 
 # version code ef5291f09f60+
@@ -89,13 +90,18 @@ x_gf2_comp = vector.GF2_solve_dot_prod_sys(one, a, b, c)
 
 ## 7: (Problem 7) Formulating Equations using Dot-Product
 #Please provide each answer as a list of numbers
-v1 = None
-v2 = None
-v3 = None
+v1 = [2, 3, -4, 1]
+v2 = [1, -5, 2, 0]
+v3 = [4, 1, -1, -1]
 
 ## 8: (Problem 8) Practice with Dot-Product
-uv_a = None
-uv_b = None
-uv_c = None
-uv_d = None
+uv_a = vector.dot_prod([1, 0], [5, 4321])
+uv_b = vector.dot_prod([0, 1], [12345, 6])
+uv_c = vector.dot_prod([-1, 3], [5, 7])
+uv_d = trunc(
+    vector.dot_prod(
+        [-(sqrt(2) / 2.0), sqrt(2) / 2.0],
+        [sqrt(2) / 2.0, -(sqrt(2) / 2.0)]
+    )
+)
 
