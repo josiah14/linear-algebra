@@ -4,6 +4,8 @@ coursera = 1
 
 # Be sure that the file voting_record_dump109.txt is in the matrix/ directory.
 
+import copy
+
 class Try:
     class Success:
         def __init__(self, value):
@@ -52,10 +54,46 @@ class Try:
     def on_error(self, method):
         if __is_failure__(): __side_effect__(method)
 
+    def bind(self, method):
+        result = method(self.__value__.get())
+        if type(result) == Try: return result
+        else: raise Exception("Try cannot bind to a function that doesn't return a Try")
 
+
+# This is a combination of the Reader, IO, and Try monad patterns
+#
+# The Try context is the result of trying to open a particular file.  The success
+# case will hold a file object, and the failure case will hold the exception raised when
+# trying to open the file.
+#
+# The Reader context is the Try-wrapped file object, contained by __file__
+#
+# This takes on a Functor pattern as it will contain any data gathered from the file in the Reader context
+# and allow you to mutate that data using lambdas.
 class FileIO:
-    def open(self, filepath):
+    def __init__(self, file_handle):
+        self.__file__ = file_handle
+        self.__value__ = Try('')
 
+    def open(self, filepath):
+        try: return FileIO(Try(open(filepath)))
+        except Exception as ex: return FileIO(Try(ex))
+
+    def close(self):
+        self.__file__.side_effect(lambda f: f.close())
+
+    def map(self, fxn):
+        new_file_io = FileIO(self.__file__)
+        new_file_io.__value__ = self.__value__.map(fxn)
+        return new_file_io
+
+    def readline(self):
+        new_file_io = FileIO(self.__file__)
+        new_file_io.__value__ = self.__file__.map(lambda f: f.readline())
+        return new_file_io
+
+    def side_effect(self, method):
+        self.__value__.side_effect(method)
 
 
 ## 1: (Task 2.12.1) Create Voting Dict
